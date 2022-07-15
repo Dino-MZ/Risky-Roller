@@ -12,4 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4aab531d12c8e20419208163866ba624, type: 3}
   m_Name: Player
   m_EditorClassIdentifier: 
-  speed: 5
+  Speed: 5
+  RollSpeed: 25
+  RollLength: 0.2
+  RollCoolDown: 1
+  MaxHealth: 8
+  FlashDuration: 0
+  HitStopDuration: 0

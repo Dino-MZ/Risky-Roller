@@ -10,11 +10,11 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody2D _rb;
 
-    public static bool CanMove;
+    public static bool CanMove, IsDashing;
 
     private Vector2 _moveDir;
 
-    private float _activeMoveSpeed;
+    private float _rollCounter, _rollCoolCounter;
 
 
 
@@ -37,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         HandleMovement();
+        HandleRoll();
     }
 
     void HandleInput()
@@ -49,9 +50,38 @@ public class PlayerMovement : MonoBehaviour
 
     void HandleMovement()
     {
-        if (CanMove)
+        if (CanMove && !IsDashing)
         {
             _rb.velocity = _moveDir * _playerSO.Speed;
+        }
+    }
+
+    void HandleRoll()
+    {
+        if (Input.GetKey(KeyCode.Space) && CanMove)
+        {
+            if(_rollCoolCounter <= 0 && _rollCounter <= 0)
+            {
+                _rb.velocity = _moveDir * _playerSO.RollSpeed;
+                IsDashing = true;
+                _rollCounter = _playerSO.RollLength;
+            }
+        }
+
+        if(_rollCounter > 0)
+        {
+            _rollCounter -= Time.deltaTime;
+
+            if(_rollCounter <= 0)
+            {
+                _rollCoolCounter = _playerSO.RollCoolDown;
+                IsDashing = false;
+            }
+        }
+
+        if(_rollCoolCounter > 0)
+        {
+            _rollCoolCounter -= Time.deltaTime;
         }
     }
 }

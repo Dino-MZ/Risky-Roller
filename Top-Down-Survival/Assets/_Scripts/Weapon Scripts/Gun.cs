@@ -37,7 +37,7 @@ public class Gun : MonoBehaviour
 
     void Update()
     {
-        _canShoot = _shooting && _readyToShoot && !_reloading && !_needsToReload && !Pause.isPaused;
+        _canShoot = _shooting && _readyToShoot && !_reloading && !_needsToReload && !Pause.isPaused && !PlayerMovement.IsDashing;
         _needsToReload = _bulletsLeft == 0;
 
         if (_gun.allowButtonHold) _shooting = Input.GetKey(KeyCode.Mouse0);
@@ -75,6 +75,12 @@ public class Gun : MonoBehaviour
         {
             _gunSprite.flipY = false;
             _ammoPos.position = _pos2.position;
+        }
+
+        if (PlayerMovement.IsDashing && !_reloading)
+        {
+            _gun.magazineSize = Random.Range(1, 7);
+            StartCoroutine(Reload());
         }
     }
 
