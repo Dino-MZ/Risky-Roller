@@ -14,6 +14,10 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector2 _moveDir;
 
+    private float _activeMoveSpeed;
+
+
+
     void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -47,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (CanMove)
         {
-            _rb.velocity = _moveDir * _playerSO.speed;
+            _rb.velocity = _moveDir * _playerSO.Speed;
         }
     }
 }

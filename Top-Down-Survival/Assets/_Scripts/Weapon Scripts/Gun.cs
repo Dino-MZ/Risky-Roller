@@ -6,121 +6,126 @@ using EZCameraShake;
 
 public class Gun : MonoBehaviour
 {
-    public BulletPooler objectPooler;
-    public GunSO gun;
+    [SerializeField] BulletPooler _objectPooler;
+    [SerializeField] GunSO _gun;
+    [SerializeField] SpriteRenderer _gunSprite;
 
     private Rigidbody2D playerRB;
-    [SerializeField] private Transform shootPoint;
-    [SerializeField] private GameObject Bullet;
+    [SerializeField] private Transform _shootPoint;
+    [SerializeField] private GameObject _bullet;
 
-    private int bulletsLeft, bulletsShot;
-    private bool shooting, readyToShoot, reloading, needsToReload, canShoot;
+    private int _bulletsLeft, _bulletsShot;
+    private bool _shooting, _readyToShoot, _reloading, _needsToReload, _canShoot;
 
-    private Vector2 mousePos, direction;
+    private Vector2 _mousePos, _direction;
     
-    [SerializeField] private TextMeshProUGUI ammoText;
+    [SerializeField] private TextMeshProUGUI _ammoText;
+    [SerializeField] private Transform _ammoPos;
+    [SerializeField] private Transform _pos1;
+    [SerializeField] private Transform _pos2;
 
-    public SpriteRenderer gunSprite;
-    private Camera cam;
+    private Camera _cam;
 
     private void Start()
     {
         playerRB = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
 
-        bulletsLeft = gun.magazineSize;
-        readyToShoot = true;
-        cam = Camera.main;
+        _bulletsLeft = _gun.magazineSize;
+        _readyToShoot = true;
+        _cam = Camera.main;
     }
 
     void Update()
     {
-        canShoot = shooting && readyToShoot && !reloading && !needsToReload && !Pause.isPaused;
-        needsToReload = bulletsLeft == 0;
+        _canShoot = _shooting && _readyToShoot && !_reloading && !_needsToReload && !Pause.isPaused;
+        _needsToReload = _bulletsLeft == 0;
 
-        if (gun.allowButtonHold) shooting = Input.GetKey(KeyCode.Mouse0);
-        else shooting = Input.GetKeyDown(KeyCode.Mouse0);
+        if (_gun.allowButtonHold) _shooting = Input.GetKey(KeyCode.Mouse0);
+        else _shooting = Input.GetKeyDown(KeyCode.Mouse0);
 
-        if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < gun.magazineSize && !reloading) StartCoroutine(Reload());
+        if (Input.GetKeyDown(KeyCode.R) && _bulletsLeft < _gun.magazineSize && !_reloading) StartCoroutine(Reload());
 
-        if (needsToReload && !reloading) StartCoroutine(Reload());
+        if (_needsToReload && !_reloading) StartCoroutine(Reload());
 
-        if (canShoot)
+        if (_canShoot)
         {
-            bulletsShot = gun.bulletsPerTap;
+            _bulletsShot = _gun.bulletsPerTap;
             Shoot();
         }
 
-        if (reloading)
+        if (_reloading)
         {
-            ammoText.SetText("[Rerolling...]");
+            _ammoText.SetText("[Rerolling...]");
         }
         else
         {
-            ammoText.SetText("" + bulletsLeft + " | " + gun.magazineSize + "");
+            _ammoText.SetText("" + _bulletsLeft + " | " + _gun.magazineSize + "");
         }
 
-        mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
-        direction = mousePos - (Vector2)transform.position;
-        transform.right = direction;
+        _mousePos = _cam.ScreenToWorldPoint(Input.mousePosition);
+        _direction = _mousePos - (Vector2)transform.position;
+        transform.right = _direction;
 
-        if (mousePos.x <= transform.position.x)
+        if (_mousePos.x <= transform.position.x)
         {
-            gunSprite.flipY = true;
+            _gunSprite.flipY = true;
+            _ammoPos.position = _pos1.position;
         }
         else
         {
-            gunSprite.flipY = false;
+            _gunSprite.flipY = false;
+            _ammoPos.position = _pos2.position;
         }
     }
 
     void Shoot()
     {
-        readyToShoot = false;
+        _readyToShoot = false;
 
-        float x = Random.Range(-gun.spread, gun.spread);
-        float y = Random.Range(-gun.spread, gun.spread);
-        Vector2 direction = new Vector3(x,y) + shootPoint.up;
+        float x = Random.Range(-_gun.spread, _gun.spread);
+        float y = Random.Range(-_gun.spread, _gun.spread);
+        Vector2 direction = new Vector3(x,y) + _shootPoint.up;
 
-        GameObject t_bullet = objectPooler.GetPooledObject();
-        t_bullet.transform.position = shootPoint.position;
-        t_bullet.transform.rotation = shootPoint.rotation;
-        t_bullet.GetComponent<PlayerBullet>().LifeTime = gun.bulletLifeTime;
+        GameObject t_bullet = _objectPooler.GetPooledObject();
+        t_bullet.transform.position = _shootPoint.position;
+        t_bullet.transform.rotation = _shootPoint.rotation;
+        t_bullet.GetComponent<PlayerBullet>().LifeTime = _gun.bulletLifeTime;
         t_bullet.SetActive(true);
 
-        t_bullet.GetComponent<PlayerBullet>().Damage = gun.PlayerDamage;
+        t_bullet.GetComponent<PlayerBullet>().Damage = _gun.PlayerDamage;
 
         Rigidbody2D bulletRb = t_bullet.GetComponent<Rigidbody2D>();
-        bulletRb.AddForce(direction * gun.bulletSpeed, ForceMode2D.Impulse);
+        bulletRb.AddForce(direction * _gun.bulletSpeed, ForceMode2D.Impulse);
         
 
-        if (gun.canShake)
+        if (_gun.canShake)
         {
-            CameraShaker.Instance.ShakeOnce(gun.magnitude, gun.roughness, gun.fadeIn, gun.fadeOut);
+            CameraShaker.Instance.ShakeOnce(_gun.magnitude, _gun.roughness, _gun.fadeIn, _gun.fadeOut);
         }
 
-        bulletsLeft--;
-        bulletsShot--;
+        _bulletsLeft--;
+        _bulletsShot--;
 
         if (t_bullet = null) return;
 
-        Invoke("ResetShot", gun.timeBetweenShooting);
+        Invoke("ResetShot", _gun.timeBetweenShooting);
 
-        if (bulletsShot > 0 && bulletsLeft > 0)
-            Invoke("Shoot", gun.timeBetweenShots);
+        if (_bulletsShot > 0 && _bulletsLeft > 0)
+            Invoke("Shoot", _gun.timeBetweenShots);
     }
 
     private void ResetShot()
     {
-        readyToShoot = true;
+        _readyToShoot = true;
     }
 
     IEnumerator Reload()
     {
-        reloading = true;
+        _reloading = true;
 
-        yield return Waiter.GetWait(gun.reloadTime);
+        yield return Waiter.GetWait(_gun.reloadTime);
 
-        bulletsLeft = gun.magazineSize;
-        reloading = false;
+        _bulletsLeft = _gun.magazineSize;
+        _reloading = false;
     }
 }

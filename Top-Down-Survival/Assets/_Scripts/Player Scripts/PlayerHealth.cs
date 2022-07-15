@@ -18,9 +18,9 @@ public class PlayerHealth : MonoBehaviour
 
     void Start()
     {
-        currentHealth = player.maxHealth;
+        currentHealth = player.MaxHealth;
         flashEffect = gameObject.GetComponent<FlashEffect>();
-        HealthBar.GetComponent<PlayerHealthBar>().SetMaxHealth(player.maxHealth);
+        HealthBar.GetComponent<PlayerHealthBar>().SetMaxHealth(player.MaxHealth);
     }
 
     void Update()
@@ -43,7 +43,7 @@ public class PlayerHealth : MonoBehaviour
 
         flashEffect.Flash();
 
-        hitStop.StopTime(player.hitStopDuration);
+        hitStop.StopTime(player.HitStopDuration);
 
         Debug.Log("Damage taken");
         Debug.Log(currentHealth);
@@ -57,9 +57,9 @@ public class PlayerHealth : MonoBehaviour
 
         healAudio.Play();
 
-        if (currentHealth > player.maxHealth)
+        if (currentHealth > player.MaxHealth)
         {
-            currentHealth = player.maxHealth;
+            currentHealth = player.MaxHealth;
 
         }
     }

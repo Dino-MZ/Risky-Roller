@@ -7,7 +7,7 @@ public class GunSO : ScriptableObject
 {
     [Header("Gun")]
     public int PlayerDamage;
-    public float bulletSpeed, bulletLifeTime, knockbackPower, timeBetweenShooting, spread, reloadTime, timeBetweenShots;
+    public float bulletSpeed, bulletLifeTime, timeBetweenShooting, spread, reloadTime, timeBetweenShots;
     public int magazineSize, bulletsPerTap;
     public bool allowButtonHold;
 

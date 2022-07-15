@@ -37,7 +37,7 @@ public class FlashEffect : MonoBehaviour
     {
         spriteRenderer.material = flashMaterial;
 
-        yield return Waiter.GetWait(player.flashDuration);
+        yield return Waiter.GetWait(player.FlashDuration);
 
         spriteRenderer.material = originalMaterial;
 

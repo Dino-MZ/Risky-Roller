@@ -12,12 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3ffb0fe00bcbe043b79e75baccb2943, type: 3}
   m_Name: Assault Rifle
   m_EditorClassIdentifier: 
-  PlayerDamage: 5
-  bulletSpeed: 30
-  bulletLifeTime: 0.5
-  knockbackPower: 2
+  PlayerDamage: 1
+  bulletSpeed: 20
+  bulletLifeTime: 0.8
   timeBetweenShooting: 0.2
-  spread: 0.03
+  spread: 0.05
   reloadTime: 0.6
   timeBetweenShots: 0.1
   magazineSize: 6

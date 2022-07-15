@@ -6,12 +6,14 @@ using UnityEngine;
 public class PlayerSO : ScriptableObject
 {
     [Header("Movement")]
-    public float speed;
+    public float Speed = 5f;
+    public float RollLength = 0.5f;
+    public float RollCoolDown = 1f;
 
     [Header("Health")]
-    public int maxHealth;
+    public int MaxHealth = 8;
 
     [Header("Effects")]
-    public float flashDuration;
-    public float hitStopDuration;
+    public float FlashDuration;
+    public float HitStopDuration;
 }
