@@ -8,8 +8,6 @@ public class Gun : MonoBehaviour
 {
     public BulletPooler objectPooler;
     public GunSO gun;
-    public bool hasUnlockedGun = false;
-    public bool isActive = false;
 
     private Rigidbody2D playerRB;
     [SerializeField] private Transform shootPoint;
@@ -19,8 +17,6 @@ public class Gun : MonoBehaviour
     private bool shooting, readyToShoot, reloading, needsToReload, canShoot;
 
     private Vector2 mousePos, direction;
-
-    [SerializeField] private AudioSource shootAudoio;
     
     [SerializeField] private TextMeshProUGUI ammoText;
 
@@ -38,49 +34,42 @@ public class Gun : MonoBehaviour
 
     void Update()
     {
-        if (isActive)
+        canShoot = shooting && readyToShoot && !reloading && !needsToReload && !Pause.isPaused;
+        needsToReload = bulletsLeft == 0;
+
+        if (gun.allowButtonHold) shooting = Input.GetKey(KeyCode.Mouse0);
+        else shooting = Input.GetKeyDown(KeyCode.Mouse0);
+
+        if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < gun.magazineSize && !reloading) StartCoroutine(Reload());
+
+        if (needsToReload && !reloading) StartCoroutine(Reload());
+
+        if (canShoot)
         {
-            canShoot = shooting && readyToShoot && !reloading && !needsToReload && !Pause.isPaused;
-            needsToReload = bulletsLeft == 0;
+            bulletsShot = gun.bulletsPerTap;
+            Shoot();
+        }
 
-            if (gun.allowButtonHold) shooting = Input.GetKey(KeyCode.Mouse0);
-            else shooting = Input.GetKeyDown(KeyCode.Mouse0);
+        if (reloading)
+        {
+            ammoText.SetText("[Rerolling...]");
+        }
+        else
+        {
+            ammoText.SetText("" + bulletsLeft + " | " + gun.magazineSize + "");
+        }
 
-            if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < gun.magazineSize && !reloading) StartCoroutine(Reload());
+        mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+        direction = mousePos - (Vector2)transform.position;
+        transform.right = direction;
 
-            if (needsToReload && !reloading) StartCoroutine(Reload());
-
-            if (canShoot)
-            {
-                bulletsShot = gun.bulletsPerTap;
-                shootAudoio.pitch = Random.Range(gun.minPitch, gun.maxPitch);
-                shootAudoio.Play();
-                Shoot();
-            }
-
-            if (reloading)
-            {
-                ammoText.SetText("[...]");
-            }
-            else
-            {
-                ammoText.SetText("[" + bulletsLeft + "|" + gun.magazineSize + "]");
-            }
-
-            mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
-            direction = mousePos - (Vector2)transform.position;
-            transform.right = direction;
-
-            if (mousePos.x <= transform.position.x)
-            {
-                gunSprite.flipY = true;
-            }
-            else
-            {
-                gunSprite.flipY = false;
-            }
-
-            //print((direction.normalized.x).ToString("0.000") + ", " + (direction.normalized.y).ToString("0.00"));
+        if (mousePos.x <= transform.position.x)
+        {
+            gunSprite.flipY = true;
+        }
+        else
+        {
+            gunSprite.flipY = false;
         }
     }
 
