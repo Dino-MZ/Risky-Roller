@@ -5,7 +5,7 @@ public class EnemyHealth : MonoBehaviour
 {
     public EnemySO enemySO;
 
-    private int curHP;
+    private int currentHP;
     private bool isDead;
 
     [SerializeField] private AudioSource damageAudio;
@@ -13,14 +13,14 @@ public class EnemyHealth : MonoBehaviour
 
     void Start()
     {
-        curHP = enemySO.MaxHP;
+        currentHP = enemySO.MaxHP;
 
         isDead = false;
     }
 
     void Update()
     {
-        if (curHP <= 0 && !isDead)
+        if (currentHP <= 0 && !isDead)
         {
             Die();
             isDead = true;
@@ -29,7 +29,7 @@ public class EnemyHealth : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        curHP -= damage;
+        currentHP -= damage;
 
         damageAudio.Play();
     }

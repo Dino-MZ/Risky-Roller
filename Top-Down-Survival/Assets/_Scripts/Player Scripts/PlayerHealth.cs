@@ -6,15 +6,15 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private PlayerSO player;
-    [SerializeField] int currentHealth;
+    private int currentHealth;
 
     public GameObject HealthBar;
     [SerializeField] private HitStop hitStop;
     public bool isDead;
     private FlashEffect flashEffect;
 
-    [SerializeField] private AudioSource damageAudio;
-    [SerializeField] private AudioSource healAudio;
+   // [SerializeField] private AudioSource damageAudio;
+   // [SerializeField] private AudioSource healAudio;
 
     void Start()
     {
@@ -39,7 +39,7 @@ public class PlayerHealth : MonoBehaviour
 
         HealthBar.GetComponent<PlayerHealthBar>().SetHealth(currentHealth);
 
-        damageAudio.Play();
+        //damageAudio.Play();
 
         flashEffect.Flash();
 
@@ -55,7 +55,7 @@ public class PlayerHealth : MonoBehaviour
         currentHealth += amount;
         HealthBar.GetComponent<PlayerHealthBar>().SetHealth(currentHealth);
 
-        healAudio.Play();
+        //healAudio.Play();
 
         if (currentHealth > player.MaxHealth)
         {

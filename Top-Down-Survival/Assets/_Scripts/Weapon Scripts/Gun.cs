@@ -20,9 +20,8 @@ public class Gun : MonoBehaviour
     private Vector2 _mousePos, _direction;
     
     [SerializeField] private TextMeshProUGUI _ammoText;
-    [SerializeField] private Transform _ammoPos;
-    [SerializeField] private Transform _pos1;
-    [SerializeField] private Transform _pos2;
+    [SerializeField] private Transform _uiPos;
+    [SerializeField] private Transform _pos;
 
     private Camera _cam;
 
@@ -69,13 +68,14 @@ public class Gun : MonoBehaviour
         if (_mousePos.x <= transform.position.x)
         {
             _gunSprite.flipY = true;
-            _ammoPos.position = _pos1.position;
         }
         else
         {
             _gunSprite.flipY = false;
-            _ammoPos.position = _pos2.position;
         }
+
+        // Move the ammo text behind the gun
+         _uiPos.position = _pos.position;
 
         if (PlayerMovement.IsDashing && !_reloading)
         {

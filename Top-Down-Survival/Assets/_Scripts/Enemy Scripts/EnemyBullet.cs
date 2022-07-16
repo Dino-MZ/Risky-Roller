@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class EnemyBullet : MonoBehaviour
 {
+    [HideInInspector]
     public int Damage;
-    public float Distance;
+    [HideInInspector]
+    public float Lifetime;
 
     public GameObject particleEffect;
 
     private void OnEnable()
     {
-        Invoke("Disable", Distance);
+        Invoke("Disable", Lifetime);
     }
 
     private void OnDisable()
