@@ -16,6 +16,6 @@ MonoBehaviour:
   RollSpeed: 25
   RollLength: 0.2
   RollCoolDown: 1
-  MaxHealth: 8
+  MaxHealth: 6
   FlashDuration: 0
   HitStopDuration: 0

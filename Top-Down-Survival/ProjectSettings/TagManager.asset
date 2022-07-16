@@ -59,3 +59,6 @@ TagManager:
   - name: bullets
     uniqueID: 1152711841
     locked: 0
+  - name: Wall
+    uniqueID: 1108203587
+    locked: 0
