@@ -13,8 +13,8 @@ public class PlayerHealth : MonoBehaviour
     public static bool isDead;
     private FlashEffect flashEffect;
 
-   // [SerializeField] private AudioSource damageAudio;
-   // [SerializeField] private AudioSource healAudio;
+   [SerializeField] private AudioSource damageAudio;
+   //[SerializeField] private AudioSource healAudio;
 
     void Start()
     {
@@ -38,7 +38,7 @@ public class PlayerHealth : MonoBehaviour
 
         HealthBar.GetComponent<PlayerHealthBar>().SetHealth(currentHealth);
 
-        //damageAudio.Play();
+        damageAudio.Play();
 
         flashEffect.Flash();
 

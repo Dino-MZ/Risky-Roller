@@ -8,6 +8,7 @@ TagManager:
   - Ground
   - Enemy
   - PlayerHitbox
+  - EnemySFX
   layers:
   - Default
   - TransparentFX

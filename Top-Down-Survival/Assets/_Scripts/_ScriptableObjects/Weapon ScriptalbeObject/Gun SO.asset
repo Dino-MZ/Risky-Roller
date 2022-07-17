@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerDamage: 1
   bulletSpeed: 20
-  bulletLifeTime: 0.8
+  bulletLifeTime: 2
   timeBetweenShooting: 0.2
   spread: 0.05
   reloadTime: 0.6
   timeBetweenShots: 0.1
-  magazineSize: 6
+  magazineSize: 5
   bulletsPerTap: 1
   allowButtonHold: 1
   minPitch: 0.6

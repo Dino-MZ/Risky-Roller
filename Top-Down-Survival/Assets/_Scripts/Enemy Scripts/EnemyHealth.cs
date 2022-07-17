@@ -10,14 +10,16 @@ public class EnemyHealth : MonoBehaviour
 
     private FlashEffect flashEffect;
 
-    // [SerializeField] private AudioSource damageAudio;
-    // [SerializeField] private AudioSource deathAudio;
+    [SerializeField] private AudioSource enemyAudio;
+    [SerializeField] private AudioClip[] enemySFX;
 
     void Start()
     {
         currentHP = enemySO.MaxHP;
         flashEffect = gameObject.GetComponent<FlashEffect>();
         isDead = false;
+
+        enemyAudio = GameObject.FindGameObjectWithTag("EnemySFX").GetComponent<AudioSource>();
     }
 
     void Update()
@@ -33,12 +35,12 @@ public class EnemyHealth : MonoBehaviour
     {
         currentHP -= damage;
         flashEffect.Flash();
-        // damageAudio.Play();
+        enemyAudio.PlayOneShot(enemySFX[0]);
     }
 
     void Die()
     {
-        // deathAudio.Play();
+        enemyAudio.PlayOneShot(enemySFX[1]);
         gameObject.SetActive(false);
     }
 

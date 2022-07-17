@@ -23,6 +23,9 @@ public class Gun : MonoBehaviour
     [SerializeField] private Transform _uiPos;
     [SerializeField] private Transform _pos;
 
+    [SerializeField] private AudioSource _shootAudio;
+    [SerializeField] private AudioClip[] _shootSFX;
+
     private Camera _cam;
 
     private void Start()
@@ -52,6 +55,7 @@ public class Gun : MonoBehaviour
         {
             _bulletsShot = _gun.bulletsPerTap;
             Shoot();
+            ShootAudio();
         }
 
         if (_reloading)
@@ -135,5 +139,12 @@ public class Gun : MonoBehaviour
 
         _bulletsLeft = _gun.magazineSize;
         _reloading = false;
+    }
+
+    void ShootAudio()
+    {
+        int r = Random.Range(0, _shootSFX.Length);
+        _shootAudio.pitch = Random.Range(_gun.minPitch, _gun.maxPitch);
+        _shootAudio.PlayOneShot(_shootSFX[r]);
     }
 }

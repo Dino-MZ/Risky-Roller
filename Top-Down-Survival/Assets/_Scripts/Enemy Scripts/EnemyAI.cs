@@ -20,7 +20,11 @@ public class EnemyAI : MonoBehaviour
 
     [SerializeField] private Transform spritePosition;
 
-    //[SerializeField] private AudioSource shootAudoio;
+    [SerializeField] private AudioSource shootAudio;
+
+    [SerializeField] private AudioClip[] shootSFX;
+
+    [SerializeField] private float minPitch, maxPitch;
 
     private Transform player;
 
@@ -45,7 +49,7 @@ public class EnemyAI : MonoBehaviour
 
         player = GameObject.FindGameObjectWithTag("Player").transform;
 
-        //shootAudoio = GameObject.FindGameObjectWithTag("ShootSFX").GetComponent<AudioSource>();
+        shootAudio = GameObject.FindGameObjectWithTag("EnemySFX").GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -84,6 +88,7 @@ public class EnemyAI : MonoBehaviour
             {
                 nextFireTime = Time.time + enemy.EnemyFireRate;
                 bulletsShot = enemy.BulletsToShoot;
+                ShootAudio();
                 Shoot();
             }  
         }
@@ -140,6 +145,13 @@ public class EnemyAI : MonoBehaviour
             Invoke("Shoot", enemy.TimeBetweenShots);
         }
 
+    }
+
+    void ShootAudio()
+    {
+        int r = Random.Range(0, shootSFX.Length);
+        shootAudio.pitch = Random.Range(minPitch, maxPitch);
+        shootAudio.PlayOneShot(shootSFX[r]);
     }
 
     #endregion

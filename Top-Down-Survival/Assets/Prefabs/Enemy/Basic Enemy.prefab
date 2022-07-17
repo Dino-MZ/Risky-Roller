@@ -225,6 +225,14 @@ MonoBehaviour:
   shootPoint: {fileID: 2649508890644448246}
   shootHandle: {fileID: 2649508891121214944}
   spritePosition: {fileID: 2649508890401624427}
+  shootAudio: {fileID: 0}
+  shootSFX:
+  - {fileID: 8300000, guid: 5b7d8559800faba409310e7a87b96afb, type: 3}
+  - {fileID: 8300000, guid: 31dfcfa6158462941b6be27d4d2e8d9b, type: 3}
+  - {fileID: 8300000, guid: c8e98230a0db5b842b798e7fe9ed1562, type: 3}
+  - {fileID: 8300000, guid: 5e70e655d5bd57946ad57d2f5f3ba16f, type: 3}
+  minPitch: 0.8
+  maxPitch: 1
 --- !u!114 &2649508890600129419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,6 +246,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemySO: {fileID: 11400000, guid: e901e9016c7e4c346b2d289ce35df81f, type: 2}
+  enemyAudio: {fileID: 0}
+  enemySFX:
+  - {fileID: 8300000, guid: baedc56362416af4f8493713d307ad7e, type: 3}
+  - {fileID: 8300000, guid: c758a97d66f28604a8c93814f3a93ab6, type: 3}
 --- !u!58 &2649508890600129418
 CircleCollider2D:
   m_ObjectHideFlags: 0
