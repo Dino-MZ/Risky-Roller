@@ -17,5 +17,5 @@ MonoBehaviour:
   RollLength: 0.2
   RollCoolDown: 1
   MaxHealth: 6
-  FlashDuration: 0
-  HitStopDuration: 0
+  FlashDuration: 0.3
+  HitStopDuration: 0.1

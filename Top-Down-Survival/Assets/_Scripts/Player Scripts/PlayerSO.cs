@@ -8,7 +8,6 @@ public class PlayerSO : ScriptableObject
     [Header("Movement")]
     public float Speed = 5f;
     public float RollSpeed = 100f;
-    public float RollLength = 0.5f;
     public float RollCoolDown = 1f;
 
     [Header("Health")]

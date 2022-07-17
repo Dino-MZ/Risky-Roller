@@ -66,6 +66,6 @@ public class PlayerHealth : MonoBehaviour
     private IEnumerator Lose()
     {
         yield return Waiter.GetWait(1);
-        SceneManager.LoadScene(3);
+        //SceneManager.LoadScene(3);
     }
 }

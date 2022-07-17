@@ -18,6 +18,8 @@ public class EnemyAI : MonoBehaviour
 
     [SerializeField] private GameObject shootHandle;
 
+    [SerializeField] private Transform spritePosition;
+
     //[SerializeField] private AudioSource shootAudoio;
 
     private Transform player;
@@ -52,17 +54,17 @@ public class EnemyAI : MonoBehaviour
 
         // Aim at the player
         Vector3 difference = player.position - shootHandle.transform.position;
-        float rotationZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg - 90f;
+        float rotationZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
         shootHandle.transform.rotation = Quaternion.Euler(0.0f, 0.0f, rotationZ);
 
         // Look right if the player is to the right and vice versa
         if (player.position.x > transform.position.x)
         {
-            transform.localScale = new Vector3(1, transform.localScale.y, transform.localScale.z);
+            spritePosition.localScale = new Vector3(1, spritePosition.localScale.y, spritePosition.localScale.z);
         }
         else if (player.position.x < transform.position.x)
         {
-            transform.localScale = new Vector3(-1, transform.localScale.y, transform.localScale.z);
+            spritePosition.localScale = new Vector3(-1, spritePosition.localScale.y, spritePosition.localScale.z);
         }
 
 

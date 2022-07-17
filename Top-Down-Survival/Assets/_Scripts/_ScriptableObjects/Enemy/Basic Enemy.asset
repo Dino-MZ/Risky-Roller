@@ -14,16 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyDamage: 1
   EnemySpeed: 100
-  ShootDistance: 5
-  LineOfSite: 10
+  ShootDistance: 8
+  LineOfSite: 50
   EnemyFireRate: 1
-  BulletSpeed: 5
+  BulletSpeed: 14
   BulletLifeTime: 5
   Spread: 0.3
   TimeBetweenShots: 0.3
-  BulletsToShoot: 5
-  EnemyBullet: {fileID: 0}
-  MaxHP: 20
+  BulletsToShoot: 3
+  EnemyBullet: {fileID: 9006409683958618332, guid: 3ba25152ea2e4f540827fd5b833d7891, type: 3}
+  MaxHP: 4
   WallLayer:
     serializedVersion: 2
     m_Bits: 0

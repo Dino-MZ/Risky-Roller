@@ -35,12 +35,12 @@ public class EnemyBullet : MonoBehaviour
             Destroy(t_Effect, 1);
             Disable();
         }
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("PlayerHitbox"))
         {
             Debug.Log("Player HIT!");
 
             GameObject t_player = collision.gameObject;
-            t_player.GetComponent<PlayerHealth>().TakeDamage(Damage);
+            t_player.GetComponentInParent<PlayerHealth>().TakeDamage(Damage);
 
             GameObject t_Effect = Instantiate(particleEffect, transform.position, transform.rotation);
             t_Effect.GetComponent<ParticleSystem>().Play();

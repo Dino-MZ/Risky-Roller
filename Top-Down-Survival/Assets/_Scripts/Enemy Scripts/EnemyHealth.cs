@@ -8,13 +8,15 @@ public class EnemyHealth : MonoBehaviour
     private int currentHP;
     private bool isDead;
 
-    [SerializeField] private AudioSource damageAudio;
-    [SerializeField] private AudioSource deathAudio;
+    private FlashEffect flashEffect;
+
+    // [SerializeField] private AudioSource damageAudio;
+    // [SerializeField] private AudioSource deathAudio;
 
     void Start()
     {
         currentHP = enemySO.MaxHP;
-
+        flashEffect = gameObject.GetComponent<FlashEffect>();
         isDead = false;
     }
 
@@ -30,13 +32,13 @@ public class EnemyHealth : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHP -= damage;
-
-        damageAudio.Play();
+        flashEffect.Flash();
+        // damageAudio.Play();
     }
 
     void Die()
     {
-        deathAudio.Play();
+        // deathAudio.Play();
         Destroy(gameObject, 0.01f);
     }
 }
