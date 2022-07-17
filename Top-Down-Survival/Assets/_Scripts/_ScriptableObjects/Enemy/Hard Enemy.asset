@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd5947e77dd350843a2ea2ae5cd1c5d6, type: 3}
   m_Name: Hard Enemy
   m_EditorClassIdentifier: 
-  EnemyDamage: 1
+  EnemyDamage: 2
   EnemySpeed: 100
   ShootDistance: 8
   LineOfSite: 50

@@ -39,6 +39,12 @@ public class EnemyHealth : MonoBehaviour
     void Die()
     {
         // deathAudio.Play();
-        Destroy(gameObject, 0.01f);
+        gameObject.SetActive(false);
+    }
+
+    private void OnEnable()
+    {
+        currentHP = enemySO.MaxHP;
+        isDead = false;
     }
 }

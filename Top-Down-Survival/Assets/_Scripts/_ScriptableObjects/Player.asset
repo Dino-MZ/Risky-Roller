@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 5
   RollSpeed: 25
-  RollLength: 0.2
   RollCoolDown: 1
-  MaxHealth: 6
+  MaxHealth: 21
   FlashDuration: 0.3
   HitStopDuration: 0.1

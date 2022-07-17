@@ -7,13 +7,14 @@ public class EnemySpawner : MonoBehaviour
 
     [SerializeField] private Transform[] spawnpoints;
 
-    [SerializeField] private GameObject basicEnemy;
+    [SerializeField] private BasicEnemyPooler basicEnemyPooler;
 
-    [SerializeField] private GameObject spyEnemy;
+    [SerializeField] private SpyEnemyPooler spyEnemyPooler;
 
     void Start()
     {
-        InvokeRepeating("SpawnEnemies", 15f, 25f);
+        InvokeRepeating("SpawnEnemies", 5f, 20f);
+        InvokeRepeating("SpawnHarderEnemies", 60f, 60f);
     }
 
     void SpawnEnemies()
@@ -28,11 +29,52 @@ public class EnemySpawner : MonoBehaviour
 
             if(r > 8)
             {
-                GameObject t_enemy = Instantiate(basicEnemy,spawnpoints[i].position, spawnpoints[i].rotation);
+                GameObject t_enemy = basicEnemyPooler.GetPooledObject();
+                t_enemy.transform.parent = spawnpoints[i].transform;
+
+                t_enemy.SetActive(true);
             }
             else
             {
-                GameObject t_enemy = Instantiate(spyEnemy, spawnpoints[i].position, spawnpoints[i].rotation);
+                GameObject t_enemy2 = spyEnemyPooler.GetPooledObject();
+                t_enemy2.transform.parent = spawnpoints[i].transform;
+
+                t_enemy2.SetActive(true);
+            }
+        }
+    }
+    void SpawnHarderEnemies()
+    {
+        if (Pause.isPaused || PlayerHealth.isDead) return;
+
+        for (int i = 0; i < spawnpoints.Length; i++)
+        {
+            int r = Random.RandomRange(0, 11);
+
+            if (r > 4)
+            {
+                GameObject t_enemy = basicEnemyPooler.GetPooledObject();
+                t_enemy.transform.parent = spawnpoints[i].transform;
+
+                t_enemy.SetActive(true);
+            }
+            else if (r > 7)
+            {
+                GameObject t_enemy2 = spyEnemyPooler.GetPooledObject();
+                t_enemy2.transform.parent = spawnpoints[i].transform;
+
+                t_enemy2.SetActive(true);
+            }
+            else 
+            {
+                GameObject t_enemy = basicEnemyPooler.GetPooledObject();
+                GameObject t_enemy2 = spyEnemyPooler.GetPooledObject();
+
+                t_enemy.transform.parent = spawnpoints[i].transform;
+                t_enemy2.transform.parent = spawnpoints[i].transform;
+
+                t_enemy.SetActive(true);
+                t_enemy2.SetActive(true);
             }
         }
     }
