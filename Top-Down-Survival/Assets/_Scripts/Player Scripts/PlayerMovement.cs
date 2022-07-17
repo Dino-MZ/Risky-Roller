@@ -41,6 +41,8 @@ public class PlayerMovement : MonoBehaviour
     
     void Update()
     {
+        if (Pause.isPaused || PlayerHealth.isDead) return;
+
         HandleInput();
 
         if (IsDashing)

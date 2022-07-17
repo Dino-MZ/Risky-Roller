@@ -10,7 +10,7 @@ public class PlayerHealth : MonoBehaviour
 
     public GameObject HealthBar;
     [SerializeField] private HitStop hitStop;
-    public bool isDead;
+    public static bool isDead;
     private FlashEffect flashEffect;
 
    // [SerializeField] private AudioSource damageAudio;
@@ -21,6 +21,7 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = player.MaxHealth;
         flashEffect = gameObject.GetComponent<FlashEffect>();
         HealthBar.GetComponent<PlayerHealthBar>().SetMaxHealth(player.MaxHealth);
+        isDead = false;
     }
 
     void Update()
@@ -28,8 +29,6 @@ public class PlayerHealth : MonoBehaviour
         if (currentHealth <= 0 && !isDead)
         {
             isDead = true;
-            StartCoroutine(Lose());
-            Debug.Log("Player has Died");
         }
     }
 
@@ -62,10 +61,5 @@ public class PlayerHealth : MonoBehaviour
             currentHealth = player.MaxHealth;
 
         }
-    }
-    private IEnumerator Lose()
-    {
-        yield return Waiter.GetWait(1);
-        //SceneManager.LoadScene(3);
     }
 }

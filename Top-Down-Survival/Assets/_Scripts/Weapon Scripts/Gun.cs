@@ -36,6 +36,8 @@ public class Gun : MonoBehaviour
 
     void Update()
     {
+        if (Pause.isPaused || PlayerHealth.isDead) return;
+
         _canShoot = _shooting && _readyToShoot && !_reloading && !_needsToReload && !Pause.isPaused && !PlayerMovement.IsDashing;
         _needsToReload = _bulletsLeft == 0;
 

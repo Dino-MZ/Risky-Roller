@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bd5947e77dd350843a2ea2ae5cd1c5d6, type: 3}
-  m_Name: Basic Enemy
+  m_Name: Hard Enemy
   m_EditorClassIdentifier: 
   EnemyDamage: 1
   EnemySpeed: 100
   ShootDistance: 8
   LineOfSite: 50
-  EnemyFireRate: 1.5
+  EnemyFireRate: 1
   BulletSpeed: 14
   BulletLifeTime: 5
   Spread: 0.3
   TimeBetweenShots: 0.3
-  BulletsToShoot: 1
+  BulletsToShoot: 2
   EnemyBullet: {fileID: 9006409683958618332, guid: 3ba25152ea2e4f540827fd5b833d7891, type: 3}
   MaxHP: 4
   WallLayer:
